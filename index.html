@@ -1,89 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Indonesian History: An Interactive Story</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sejarah Indonesia</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <div id="music-control">
-    <audio id="bg-music" loop>
-      <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9e4e3e.mp3" type="audio/mp3">
-      Your browser does not support the audio element.
-    </audio>
-    <button id="music-btn" aria-label="Toggle Music">🔊</button>
-  </div>
-  <div id="hero" class="section active">
-    <h1>Indonesian History</h1>
-    <h2>An Interactive Story</h2>
-    <button id="start-btn">Start Story</button>
-  </div>
-  
-  <div id="story">
-    <section class="section" id="majapahit">
-      <h2>Majapahit Kingdom</h2>
-      <p>
-        The Majapahit Empire (1293–1527) was one of the greatest and most powerful empires in Southeast Asian history. Centered in East Java, it united much of the Indonesian archipelago through trade, culture, and military might. Its legacy can still be seen in modern Indonesian culture.
-      </p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Majapahit_Territory.png/400px-Majapahit_Territory.png" alt="Majapahit Map"/>
-      <div class="quiz">
-        <h3>Quiz: Where was the Majapahit Empire centered?</h3>
-        <form>
-          <label><input type="radio" name="majapahit" value="A"> Sumatra</label><br>
-          <label><input type="radio" name="majapahit" value="B"> East Java</label><br>
-          <label><input type="radio" name="majapahit" value="C"> Sulawesi</label><br>
-          <button type="submit" class="quiz-btn">Submit Answer</button>
-        </form>
-        <div class="quiz-feedback"></div>
-      </div>
-      <button class="next-btn" disabled>Next</button>
-    </section>
-    
-    <section class="section" id="colonial">
-      <h2>Dutch Colonial Era</h2>
-      <p>
-        From the 17th century, the Dutch colonized Indonesia, exploiting its resources and people. The struggle against colonial rule lasted for centuries, shaping a strong sense of unity and identity among Indonesians.
-      </p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Flag_of_the_Dutch_East_India_Company.svg/320px-Flag_of_the_Dutch_East_India_Company.svg.png" alt="Dutch East India Company Flag"/>
-      <div class="quiz">
-        <h3>Quiz: Which country colonized Indonesia for centuries?</h3>
-        <form>
-          <label><input type="radio" name="colonial" value="A"> Spain</label><br>
-          <label><input type="radio" name="colonial" value="B"> Britain</label><br>
-          <label><input type="radio" name="colonial" value="C"> Netherlands (Dutch)</label><br>
-          <button type="submit" class="quiz-btn">Submit Answer</button>
-        </form>
-        <div class="quiz-feedback"></div>
-      </div>
-      <button class="next-btn" disabled>Next</button>
-    </section>
-    
-    <section class="section" id="independence">
-      <h2>Independence</h2>
-      <p>
-        On August 17, 1945, Indonesia proclaimed independence. Led by Sukarno and Hatta, Indonesians fought bravely to defend their freedom. After years of struggle, Indonesia was finally recognized as an independent nation in 1949.
-      </p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Proklamasi.jpg" alt="Proclamation of Independence"/>
-      <div class="quiz">
-        <h3>Quiz: In what year did Indonesia proclaim independence?</h3>
-        <form>
-          <label><input type="radio" name="independence" value="A"> 1945</label><br>
-          <label><input type="radio" name="independence" value="B"> 1950</label><br>
-          <label><input type="radio" name="independence" value="C"> 1965</label><br>
-          <button type="submit" class="quiz-btn">Submit Answer</button>
-        </form>
-        <div class="quiz-feedback"></div>
-      </div>
-      <button class="next-btn" disabled>Next</button>
-    </section>
-    
-    <section class="section" id="modern">
-      <h2>Modern Indonesia</h2>
-      <p>
-        Today, Indonesia is a vibrant democracy, rich in culture and diversity, and is the largest economy in Southeast Asia. Its journey from ancient kingdom to modern nation is a story of resilience and unity.
-      </p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Flag_of_Indonesia.svg/320px-Flag_of_Indonesia.svg.png" alt="Indonesian
+  <audio id="bg-music" src="musik-indonesia.mp3" loop></audio>
+  <button id="music-btn">🔇</button>
+
+  <section id="hero" class="section active">
+    <h1>Selamat Datang di Sejarah Indonesia</h1>
+    <p>Jelajahi perjalanan bangsa dari kerajaan hingga kemerdekaan.</p>
+    <button id="start-btn">Mulai Cerita</button>
+  </section>
+
+  <section id="story" class="section">
+    <div class="slide">
+      <h2>Kerajaan Majapahit</h2>
+      <p>Majapahit mencapai puncak kejayaannya di bawah Hayam Wuruk dan Gajah Mada, menyatukan Nusantara.</p>
+      <button class="next-btn">Lanjut</button>
+    </div>
+    <div class="slide">
+      <h2>Sumpah Pemuda 1928</h2>
+      <p>Para pemuda menyatakan satu tanah air, satu bangsa, dan satu bahasa: Indonesia.</p>
+      <button class="next-btn">Lanjut</button>
+    </div>
+    <div class="slide">
+      <h2>Proklamasi Kemerdekaan</h2>
+      <p>Soekarno dan Hatta memproklamasikan kemerdekaan Indonesia pada 17 Agustus 1945.</p>
+      <button class="next-btn">Lanjut ke Kuis</button>
+    </div>
+  </section>
+
+  <section id="quiz" class="section">
+    <h2>Kuis Sejarah Indonesia</h2>
+    <div class="quiz">
+      <p>Kapan Indonesia merdeka?</p>
+      <form>
+        <label><input type="radio" name="q1" value="A" /> 1 Juni 1945</label><br />
+        <label><input type="radio" name="q1" value="B" /> 17 Agustus 1945</label><br />
+        <label><input type="radio" name="q1" value="C" /> 10 November 1945</label><br />
+        <button class="quiz-btn">Jawab</button>
+      </form>
+      <div class="quiz-feedback"></div>
+      <button class="next-btn" disabled>Lanjut</button>
+    </div>
+  </section>
+
+  <section id="result" class="section">
+    <h2>Hasil Kuis</h2>
+    <div id="score"></div>
+    <button id="restart-btn">Ulangi</button>
+  </section>
+</body>
+</html>
