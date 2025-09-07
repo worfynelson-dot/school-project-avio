@@ -1,204 +1,41 @@
-:root {
-  --primary: #e63946;
-  --background: #f1faee;
-  --text: #1d3557;
-  --accent: #457b9d;
-  --quiz-correct: #38b000;
-  --quiz-wrong: #e63946;
-}
-
 body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f4f8;
   margin: 0;
-  font-family: 'Montserrat', Arial, sans-serif;
-  background: var(--background);
-  color: var(--text);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-#music-control {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1000;
-}
-
-#music-btn {
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 1.5em;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(30,50,80,0.15);
-  transition: background 0.2s;
-}
-#music-btn:hover {
-  background: var(--accent);
-}
-
-#hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 80vh;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: #fff;
+  padding: 2rem;
   text-align: center;
-  transition: opacity 0.7s;
-}
-
-#hero h1 {
-  font-size: 3rem;
-  margin-bottom: 0.3em;
-}
-
-#hero h2 {
-  font-weight: 400;
-  margin-bottom: 1.5em;
-}
-
-#start-btn {
-  background: #fff;
-  color: var(--primary);
-  border: none;
-  font-size: 1.2em;
-  padding: 0.8em 2em;
-  border-radius: 25px;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  transition: background 0.2s, color 0.2s;
-}
-#start-btn:hover {
-  background: var(--primary);
-  color: #fff;
-}
-
-#story {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 80vh;
-  justify-content: center;
 }
 
 .section {
   display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: #fff;
-  margin: 2em auto;
-  max-width: 480px;
-  border-radius: 18px;
-  box-shadow: 0 2px 12px rgba(30,50,80,0.07);
-  padding: 2.5em 1.5em 2em 1.5em;
-  position: relative;
   opacity: 0;
-  transform: translateY(40px);
+  transition: opacity 0.5s ease;
 }
 
 .section.active {
-  display: flex;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s, transform 0.6s;
-}
-
-.section img {
-  max-width: 80%;
-  border-radius: 10px;
-  margin-top: 1.4em;
-  margin-bottom: 1.4em;
-  box-shadow: 0 2px 8px rgba(69,123,157,0.09);
-}
-
-.next-btn, #restart-btn, #finish-btn {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  font-size: 1.05em;
-  margin-top: 1em;
-  padding: 0.7em 1.7em;
-  border-radius: 22px;
-  cursor: pointer;
-  transition: background 0.2s;
-  box-shadow: 0 2px 8px rgba(69,123,157,0.07);
-}
-.next-btn:disabled, #finish-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-.next-btn:hover:enabled, #finish-btn:hover:enabled, #restart-btn:hover {
-  background: var(--primary);
-}
-
-.quiz {
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-  padding: 1em 0.4em 0.2em 0.4em;
-  background: #f6fafd;
-  border-radius: 12px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.quiz h3 {
-  margin-top: 0;
-  margin-bottom: 0.5em;
-  font-size: 1.1em;
-}
-
-.quiz label {
   display: block;
-  text-align: left;
-  margin: 0.4em 0;
+  opacity: 1;
+}
+
+button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.quiz-feedback {
-  margin-top: 0.7em;
-  font-weight: bold;
-  min-height: 1.2em;
+button:hover {
+  background-color: #005fa3;
 }
 
 .quiz-feedback.correct {
-  color: var(--quiz-correct);
+  color: green;
 }
 
 .quiz-feedback.wrong {
-  color: var(--quiz-wrong);
-}
-
-.quiz-btn {
-  margin-top: 0.6em;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  padding: 0.5em 1.2em;
-  border-radius: 18px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.quiz-btn:hover {
-  background: var(--primary);
-}
-
-#score {
-  font-size: 1.6em;
-  margin-bottom: 1.3em;
-}
-
-footer {
-  text-align: center;
-  color: #bbb;
-  font-size: 0.95em;
-  margin: 2em 0 1em;
+  color: red;
 }
