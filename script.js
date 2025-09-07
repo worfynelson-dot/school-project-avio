@@ -1,106 +1,80 @@
-const sections = document.querySelectorAll('.section');
-const startBtn = document.getElementById('start-btn');
-const musicBtn = document.getElementById('music-btn');
-const bgMusic = document.getElementById('bg-music');
-const restartBtn = document.getElementById('restart-btn');
-const scoreDiv = document.getElementById('score');
+const blobURL = 'https://vercel.blob/api/school-project-avio-blob';
 
-let current = 0;
-let musicPlaying = false;
-let userInteracted = false;
-let score = 0;
+// Login
+if (document.getElementById('login-btn')) {
+  document.getElementById('login-btn').addEventListener('click', () => {
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+    const feedback = document.getElementById('login-feedback');
 
-function playMusic() {
-  bgMusic.volume = 0.35;
-  bgMusic.play();
-  musicBtn.textContent = "🔊";
-  musicPlaying = true;
-}
-
-function pauseMusic() {
-  bgMusic.pause();
-  musicBtn.textContent = "🔇";
-  musicPlaying = false;
-}
-
-musicBtn.addEventListener('click', () => {
-  musicPlaying ? pauseMusic() : playMusic();
-});
-
-document.body.addEventListener('click', () => {
-  if (!userInteracted) {
-    playMusic();
-    userInteracted = true;
-  }
-}, { once: true });
-
-function showSection(index) {
-  sections.forEach((s, i) => {
-    s.classList.remove('active');
-    if (i === index) {
-      s.classList.add('active');
-      gsap.fromTo(s, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7 });
-    }
-  });
-}
-
-startBtn.addEventListener('click', () => {
-  current = 1;
-  showSection(current);
-});
-
-document.querySelectorAll('.next-btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    current++;
-    showSection(current);
-  });
-});
-
-document.querySelectorAll('.quiz').forEach((quizDiv) => {
-  const form = quizDiv.querySelector('form');
-  const feedback = quizDiv.querySelector('.quiz-feedback');
-  const nextBtn = quizDiv.querySelector('.next-btn');
-  const submitBtn = form.querySelector('.quiz-btn');
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const checked = form.querySelector('input[type="radio"]:checked');
-    if (!checked) {
-      feedback.textContent = "Pilih jawaban dulu!";
-      feedback.className = "quiz-feedback wrong";
-      return;
-    }
-
-    if (checked.value === "B") {
-      feedback.textContent = "Benar!";
-      feedback.className = "quiz-feedback correct";
-      score++;
+    if (user === 'user' && pass === 'user') {
+      localStorage.setItem('role', 'user');
+      window.location.href = 'dashboard.html';
+    } else if (user === 'adityagalihpratama' && pass === 'aditya1717') {
+      localStorage.setItem('role', 'admin');
+      window.location.href = 'dashboard.html';
     } else {
-      feedback.textContent = "Salah. Jawaban yang benar adalah 17 Agustus 1945.";
-      feedback.className = "quiz-feedback wrong";
+      feedback.textContent = 'Login gagal. Coba lagi.';
     }
-
-    form.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
-    submitBtn.disabled = true;
-    nextBtn.disabled = false;
   });
-});
+}
 
-restartBtn.addEventListener('click', () => {
-  score = 0;
-  current = 1;
-  document.querySelectorAll('.quiz').forEach((quizDiv) => {
-    const form = quizDiv.querySelector('form');
-    form.querySelectorAll('input[type="radio"]').forEach(r => {
-      r.checked = false;
-      r.disabled = false;
+// Dashboard
+if (document.getElementById('lesson-menu')) {
+  const lessonMenu = document.getElementById('lesson-menu');
+  const lessonContent = document.getElementById('lesson-content');
+
+  fetch(blobURL)
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(lesson => {
+        const opt = document.createElement('option');
+        opt.value = lesson.title;
+        opt.textContent = lesson.title;
+        lessonMenu.appendChild(opt);
+      });
     });
-    form.querySelector('.quiz-btn').disabled = false;
-    quizDiv.querySelector('.quiz-feedback').textContent = "";
-    quizDiv.querySelector('.quiz-feedback').className = "quiz-feedback";
-    quizDiv.querySelector('.next-btn').disabled = true;
-  });
-  showSection(current);
-});
 
-showSection(0);
+  document.getElementById('load-lesson').addEventListener('click', () => {
+    const selected = lessonMenu.value;
+    fetch(blobURL)
+      .then(res => res.json())
+      .then(data => {
+        const lesson = data.find(l => l.title === selected);
+        lessonContent.textContent = lesson ? lesson.content : "Pelajaran tidak ditemukan.";
+      });
+  });
+
+  if (localStorage.getItem('role') === 'admin') {
+    document.getElementById('admin-access').style.display = 'inline-block';
+    document.getElementById('admin-access').addEventListener('click', () => {
+      window.location.href = 'admin.html';
+    });
+  }
+}
+
+// Admin Panel
+if (document.getElementById('add-lesson-btn')) {
+  document.getElementById('add-lesson-btn').addEventListener('click', () => {
+    const title = document.getElementById('new-lesson-title').value;
+    const content = document.getElementById('new-lesson-content').value;
+    const feedback = document.getElementById('admin-feedback');
+
+    if (title && content) {
+      fetch(blobURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, content })
+      })
+      .then(res => {
+        if (res.ok) {
+          feedback.textContent = `Pelajaran "${title}" berhasil ditambahkan.`;
+        } else {
+          feedback.textContent = "Gagal menambahkan pelajaran.";
+        }
+      });
+    } else {
+      feedback.textContent = "Judul dan konten harus diisi.";
+    }
+  });
+}
