@@ -1,24 +1,21 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: #f0f4f8;
+  background: #f4f6f9;
   margin: 0;
   padding: 2rem;
   text-align: center;
 }
 
-.section {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.section.active {
+input, textarea, select {
   display: block;
-  opacity: 1;
+  margin: 1rem auto;
+  padding: 0.6rem;
+  width: 80%;
+  max-width: 400px;
+  font-size: 1rem;
 }
 
 button {
-  margin-top: 1rem;
   padding: 0.6rem 1.2rem;
   font-size: 1rem;
   background-color: #0078d4;
@@ -32,10 +29,15 @@ button:hover {
   background-color: #005fa3;
 }
 
-.quiz-feedback.correct {
-  color: green;
+#lesson-content {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.quiz-feedback.wrong {
-  color: red;
+.login-container, .dashboard, .admin-panel {
+  max-width: 600px;
+  margin: auto;
 }
